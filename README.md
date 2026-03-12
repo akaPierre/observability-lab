@@ -12,6 +12,8 @@ Ambiente de observabilidade local com Spring Boot, Prometheus e Grafana.
 ## Como rodas
 ```bash
 docker compose up --build
+```
+
 | Serviço | URL |
 | Backend | http://localhost:8080 |
 | Prometheus | http://localhost:9090 |
