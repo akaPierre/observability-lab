@@ -17,7 +17,7 @@ docker compose up --build
 | Serviço | URL |
 | Backend | http://localhost:8080 |
 | Prometheus | http://localhost:9090 |
-| Grafana | http://localhost:3000 (admin/admin123)
+| Grafana | http://localhost:3000 (admin/admin123) |
 
 ### Simulação de incidentes
 - `GET /slow` → latência alta
