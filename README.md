@@ -9,15 +9,16 @@ Ambiente de observabilidade local com Spring Boot, Prometheus e Grafana.
 - Grafana
 - Docker Compose
 
-## Como rodas
+## Como rodar
 ```bash
 docker compose up --build
 ```
 
-| Serviço | URL |
-| Backend | http://localhost:8080 |
-| Prometheus | http://localhost:9090 |
-| Grafana | http://localhost:3000 (admin/admin123) |
+| **Serviço** | **URL**                                |
+|-------------|----------------------------------------|
+| Backend     | http://localhost:8080                  |
+| Prometheus  | http://localhost:9090                  |
+| Grafana     | http://localhost:3000 (admin/admin123) |
 
 ### Simulação de incidentes
 - `GET /slow` → latência alta
