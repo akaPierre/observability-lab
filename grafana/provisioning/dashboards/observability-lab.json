@@ -1,0 +1,145 @@
+{
+  "__inputs": [],
+  "__requires": [],
+  "annotations": { "list": [] },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "panels": [
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [{ "color": "green", "value": null }]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 0 },
+      "id": 1,
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"] },
+        "orientation": "auto",
+        "textMode": "auto",
+        "colorMode": "background"
+      },
+      "title": "Status da Aplicação",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "up{job=\"observability-lab\"}",
+          "legendFormat": "UP/DOWN",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": { "defaults": { "unit": "reqps" }, "overrides": [] },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 4 },
+      "id": 2,
+      "title": "Requisições por Segundo",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "rate(http_server_requests_seconds_count{application=\"observability-lab\"}[1m])",
+          "legendFormat": "{{uri}} - {{method}}",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": { "defaults": { "unit": "s" }, "overrides": [] },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 4 },
+      "id": 3,
+      "title": "Latência Média por Endpoint",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "rate(http_server_requests_seconds_sum{application=\"observability-lab\"}[1m]) / rate(http_server_requests_seconds_count{application=\"observability-lab\"}[1m])",
+          "legendFormat": "{{uri}}",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": { "defaults": { "unit": "reqps" }, "overrides": [] },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 12 },
+      "id": 4,
+      "title": "Taxa de Erros (5xx) por Minuto",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "rate(http_server_requests_seconds_count{application=\"observability-lab\", status=~\"5..\"}[1m])",
+          "legendFormat": "Erros {{uri}}",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": { "defaults": { "unit": "bytes" }, "overrides": [] },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 12 },
+      "id": 5,
+      "title": "Memória JVM Usada",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "jvm_memory_used_bytes{application=\"observability-lab\", area=\"heap\"}",
+          "legendFormat": "Heap - {{id}}",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": { "unit": "percentunit", "max": 1 },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 20 },
+      "id": 6,
+      "title": "CPU da Aplicação (process)",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "process_cpu_usage{application=\"observability-lab\"}",
+          "legendFormat": "CPU Usage",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": { "defaults": { "unit": "short" }, "overrides": [] },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 20 },
+      "id": 7,
+      "title": "Contagem Total de Erros Simulados",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "app_errors_total{application=\"observability-lab\"}",
+          "legendFormat": "Erros Simulados",
+          "refId": "A"
+        }
+      ]
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 38,
+  "tags": ["observability", "spring-boot", "portfolio"],
+  "templating": { "list": [] },
+  "time": { "from": "now-15m", "to": "now" },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Observability Lab",
+  "uid": "observability-lab-1",
+  "version": 1
+}

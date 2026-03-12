@@ -1,0 +1,15 @@
+global:
+  scrape_interval: 5s
+  evaluation_interval: 5s
+
+scrape_configs:
+  - job_name: 'observability-lab'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['backend:8080']
+
+compose
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: instance
+        replacement: 'observability-lab-instance'
